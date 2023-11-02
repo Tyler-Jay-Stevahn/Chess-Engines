@@ -3,3 +3,5 @@ pyinstaller --onefile test.py
 pyinstaller --onefile "C:\Users\tstevahn\Phone\Documents\Chess Program\version1.py"
 
 pyinstaller --onefile "C:\Users\tstevahn\Phone\Documents\Chess Program\test.py"
+
+change in file.
