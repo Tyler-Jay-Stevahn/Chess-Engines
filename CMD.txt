@@ -1,7 +1,7 @@
 pyinstaller --onefile test.py
 
-pyinstaller --onefile "C:\Users\tstevahn\Phone\Documents\Chess Program\version1.py"
+pyinstaller --onefile "C:\Users\tstevahn\Phone\Documents\Chess-Engines\version1.py"
 
-pyinstaller --onefile "C:\Users\tstevahn\Phone\Documents\Chess Program\test.py"
+pyinstaller --onefile "C:\Users\tstevahn\Phone\Documents\Chess-Engines\test.py"
 
 change in file.

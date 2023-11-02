@@ -39,7 +39,7 @@ while run:
         # print(legal_moves)
         if legal_moves:
             best_move = random.choice(legal_moves)
-            time.sleep(0.25)
+            time.sleep(0.25) # put this here to test GUI's to see if this was the issue. It was not the issue.
             print("bestmove", best_move)
         else:
             print("bestmove (none)")  # No legal moves left
