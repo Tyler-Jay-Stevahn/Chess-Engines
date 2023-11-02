@@ -1,0 +1,23 @@
+<version1(1): r n b q k b n r
+<version1(1): p p p p p p p p
+<version1(1): . . . . . . . .
+<version1(1): . . . . . . . .
+<version1(1): . . . . . . . .
+<version1(1): . . . . . . . .
+<version1(1): P P P P P P P P
+<version1(1): R N B Q K B N R
+<version1(1): id Version_1
+<version1(1): uciok
+>version1(1): isready
+<version1(1): readyok
+>version1(1): ucinewgame
+>version1(1): position startpos
+<version1(1): readyok
+>version1(1): position startpos moves d2d4
+>version1(1): isready
+<version1(1): readyok
+>version1(1): go wtime 300000 btime 300000 movestogo 40
+<version1(1): [Move.from_uci('g8h6'), Move.from_uci('g8f6'), Move.from_uci('b8c6'), Move.from_uci('b8a6'), Move.from_uci('h7h6'), Move.from_uci('g7g6'), Move.from_uci('f7f6'), Move.from_uci('e7e6'), Move.from_uci('d7d6'), Move.from_uci('c7c6'), Move.from_uci('b7b6'), Move.from_uci('a7a6'), Move.from_uci('h7h5'), Move.from_uci('g7g5'), Move.from_uci('f7f5'), Move.from_uci('e7e5'), Move.from_uci('d7d5'), Move.from_uci('c7c5'), Move.from_uci('b7b5'), Move.from_uci('a7a5')]
+<version1(1): bestmove h7h5
+>version1(1): position startpos moves d2d4 h7h5 e2e4
+>version1(1): isready
