@@ -7,3 +7,5 @@ Random_moves.py Literally just makes random moves.
     - has good stability with CuteChess GUI
     - has bad stability with Banksiagui
     - does not have any scoring method for moves
+Test.py currently is messing around with a scoring method.
+- Note: this is still in the testing phase and it is using the Randm_moves.py as a baseline. 
