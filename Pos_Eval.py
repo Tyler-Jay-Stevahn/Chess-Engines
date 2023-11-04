@@ -24,7 +24,7 @@ result = engine_evaluation(board)
 print(result)
 '''
 
-
+'''
 # Create or open a CSV file to store the results
 # file_path = "C:/Users/Snick/Documents/To_Laptop/Chess-Engines/fen_scores.csv"  # Change this to your desired file path
 file_path = "C:/Users/tstevahn/To_Laptop/Chess-Engines/fen_scores.csv"  # Change this to your desired file path
@@ -55,3 +55,4 @@ with open(file_path, 'w', newline='') as file:
                 pass  # Skip empty FEN strings
 
 print(f"Data written to {file_path}.")
+'''

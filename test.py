@@ -15,7 +15,8 @@ run = True
 
 while not board.is_game_over():
     message = input()
-    with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
+    #with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
+    with open('C:/Users/Snick/Documents/To_Laptop/Chess-Engines/log.txt', 'a') as file:
         file.write(message + os.linesep)
         file.close()
     if message == "quit":
@@ -23,17 +24,20 @@ while not board.is_game_over():
     # this is for the uciok message
     if message == "uci":
         print("id Random_moves")
-        with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
+        #with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
+        with open('C:/Users/Snick/Documents/To_Laptop/Chess-Engines/log.txt', 'a') as file:
             file.write("id Random_moves" + os.linesep)
             file.close()    
         print("uciok")
-        with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
+        #with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
+        with open('C:/Users/Snick/Documents/To_Laptop/Chess-Engines/log.txt', 'a') as file:
             file.write("uciok" + os.linesep)
             file.close()    
     # this is for the isready message
     if message == "isready":
         print("readyok")
-        with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
+        #with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
+        with open('C:/Users/Snick/Documents/To_Laptop/Chess-Engines/log.txt', 'a') as file:
             file.write("readyok" + os.linesep)
             file.close()    
 
@@ -42,7 +46,8 @@ while not board.is_game_over():
         #board = chess.Board()
         moves = [] 
         print("readyok")
-        with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
+        # with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
+        with open('C:/Users/Snick/Documents/To_Laptop/Chess-Engines/log.txt', 'a') as file:
             file.write("readyok" + os.linesep)
             file.close()    
     
@@ -56,6 +61,7 @@ while not board.is_game_over():
             board = chess.Board() 
             for move in moves:
                 i = i + 1
+                print(move)
                 board.push_uci(move)
             if (i % 2) == 1:
                 turn = "black"
@@ -68,8 +74,8 @@ while not board.is_game_over():
         # print(legal_moves)
         high_score = -1000000
         move_score = -2000
-        with open("C:/Users/tstevahn/To_Laptop/Chess-Engines/fen_test.txt", 'a') as file: # Desktop 
-        # with open("C:/Users/Snick/Documents/To_Laptop/Chess-Engines/fen_test.txt", 'a') as file: # Laptop
+        # with open("C:/Users/tstevahn/To_Laptop/Chess-Engines/fen_test.txt", 'a') as file: # Desktop 
+        with open("C:/Users/Snick/Documents/To_Laptop/Chess-Engines/fen_test.txt", 'a') as file: # Laptop
             file.write(board.fen() + os.linesep)
         if legal_moves:
             # best_move = random.choice(legal_moves)
@@ -80,14 +86,17 @@ while not board.is_game_over():
                 # print(board)
                 # print(board.fen())
                 # print(board)
-                move_score = random.randrange(1,10, 1)
+                # move_score = random.randrange(1,10, 1)
                 # move_score = engine_evaluation(board.fen(), 0.01)
-                # move_score = minmax(board,turn, 2)
-                # move_score = evaluation(fen) # this evaluates boards by pieces in play.
-                # print(move, move_score)
+                # print(board, turn, "2")
+                move_score = minmax(board, 1, turn)
+                #new_board = board.push_uci(move)
+                # move_score = evaluation(board) # this evaluates boards by pieces in play.
+                print(move, move_score)
                 if move_score > high_score:
                     high_score = move_score
                     best_move = move
+                curr_board
             
             # print("The Best move is",best_move,"with a score of" , move_score)
             
@@ -100,11 +109,12 @@ while not board.is_game_over():
             new_message = best_move
             new_message = str(new_message)
             # print("bestmove " , new_message)
-            with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
+            # with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
+            with open('C:/Users/Snick/Documents/To_Laptop/Chess-Engines/log.txt', 'a') as file:
                 file.write("bestmove " + new_message + os.linesep)
                 file.close()
             
             print("bestmove", best_move)
-            time.sleep(0.25)
+            time.sleep(0.05)
         else:
             print("bestmove (none)")  # No legal moves left
