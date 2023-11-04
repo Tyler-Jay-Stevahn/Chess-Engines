@@ -1,9 +1,8 @@
-import random
+
 import chess
 import chess.engine
 import time
-from minmax import minmax, evaluation
-from Pos_Eval import engine_evaluation
+from minmax_NSBM import minmax
 import os
 
 
