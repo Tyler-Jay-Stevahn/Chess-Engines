@@ -1,0 +1,46 @@
+<stockfish 16(1): Stockfish 16 by the Stockfish developers (see AUTHORS file)
+<stockfish 16(1): id name Stockfish 16
+<stockfish 16(1): id author the Stockfish developers (see AUTHORS file)
+<stockfish 16(1): option name Debug Log File type string default 
+<stockfish 16(1): option name Threads type spin default 1 min 1 max 1024
+<stockfish 16(1): option name Hash type spin default 16 min 1 max 33554432
+<stockfish 16(1): option name Clear Hash type button
+<stockfish 16(1): option name Ponder type check default false
+<stockfish 16(1): option name MultiPV type spin default 1 min 1 max 500
+<stockfish 16(1): option name Skill Level type spin default 20 min 0 max 20
+<stockfish 16(1): option name Move Overhead type spin default 10 min 0 max 5000
+<stockfish 16(1): option name Slow Mover type spin default 100 min 10 max 1000
+<stockfish 16(1): option name nodestime type spin default 0 min 0 max 10000
+<stockfish 16(1): option name UCI_Chess960 type check default false
+<stockfish 16(1): option name UCI_AnalyseMode type check default false
+<stockfish 16(1): option name UCI_LimitStrength type check default false
+<stockfish 16(1): option name UCI_Elo type spin default 1320 min 1320 max 3190
+<stockfish 16(1): option name UCI_ShowWDL type check default false
+<stockfish 16(1): option name SyzygyPath type string default <empty>
+<stockfish 16(1): option name SyzygyProbeDepth type spin default 1 min 1 max 100
+<stockfish 16(1): option name Syzygy50MoveRule type check default true
+<stockfish 16(1): option name SyzygyProbeLimit type spin default 7 min 0 max 7
+<stockfish 16(1): option name Use NNUE type check default true
+<stockfish 16(1): option name EvalFile type string default nn-5af11540bbfe.nnue
+<stockfish 16(1): uciok
+>stockfish 16(1): setoption name Debug Log File
+>stockfish 16(1): setoption name EvalFile value nn-5af11540bbfe.nnue
+>stockfish 16(1): setoption name Hash value 16
+>stockfish 16(1): setoption name Move Overhead value 10
+>stockfish 16(1): setoption name MultiPV value 1
+>stockfish 16(1): setoption name Skill Level value 20
+>stockfish 16(1): setoption name Slow Mover value 100
+>stockfish 16(1): setoption name Syzygy50MoveRule value true
+>stockfish 16(1): setoption name SyzygyPath value <empty>
+>stockfish 16(1): setoption name SyzygyProbeDepth value 1
+>stockfish 16(1): setoption name SyzygyProbeLimit value 7
+>stockfish 16(1): setoption name Threads value 1
+>stockfish 16(1): setoption name UCI_Elo value 1320
+>stockfish 16(1): setoption name UCI_LimitStrength value false
+>stockfish 16(1): setoption name Use NNUE value true
+>stockfish 16(1): setoption name nodestime value 0
+>stockfish 16(1): isready
+<stockfish 16(1): readyok
+>stockfish 16(1): ucinewgame
+>stockfish 16(1): setoption name Ponder value false
+>stockfish 16(1): position startpos
