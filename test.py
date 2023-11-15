@@ -16,20 +16,21 @@ board = chess.Board()
 run = True
 
 def select_best_move(board, depth, alpha, beta, maximizing_player):
-    #print("list moves")
+    # print("list moves")
     legal_moves = list(board.legal_moves)
     best_move = None
     if maximizing_player:
         best_score = -float(10000) 
     else:
         best_score = float(10000)
-    #print("Set Score")
+    # print("Set Score")
 
     for move in legal_moves:
         board_copy = board.copy()
         board_copy.push(move)
+        # print(move)
         move_score = minmax(board_copy, depth - 1, alpha, beta, not maximizing_player)
-        print("info score cp", move_score) #Stockfish prints  info depth 2 seldepth 2 multipv 1 score cp 910 nodes 116 nps 116000 hashfull 0 tbhits 0 time 1 pv d7c6
+        print("info score cp", move_score, "for move", move) #Stockfish prints  info depth 2 seldepth 2 multipv 1 score cp 910 nodes 116 nps 116000 hashfull 0 tbhits 0 time 1 pv d7c6
         # White is maximizing_player
         if maximizing_player:
             if move_score > best_score:
