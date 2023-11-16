@@ -16,10 +16,11 @@ PV = {
     'king': 99999
 }
 
+
 DRAW_VALUE = 0
 
 # Piece Square Tables
-pawn_table = [
+pawn_table_white = [
     0, 0, 0, 0, 0, 0, 0, 0,
     5, 10, 10, -20, -20, 10, 10, 5,
     5, -5, -10, 0, 0, -10, -5, 5,
@@ -30,7 +31,8 @@ pawn_table = [
     0, 0, 0, 0, 0, 0, 0, 0
 ]
 
-knight_table = [
+
+knight_table_white = [
     -50, -40, -30, -30, -30, -30, -40, -50,
     -40, -20, 0, 0, 0, 0, -20, -40,
     -30, 0, 10, 15, 15, 10, 0, -30,
@@ -41,7 +43,7 @@ knight_table = [
     -50, -40, -30, -30, -30, -30, -40, -50
 ]
 
-bishop_table = [
+bishop_table_white = [
     -20, -10, -10, -10, -10, -10, -10, -20,
     -10, 0, 0, 0, 0, 0, 0, -10,
     -10, 0, 5, 10, 10, 5, 0, -10,
@@ -52,7 +54,7 @@ bishop_table = [
     -20, -10, -10, -10, -10, -10, -10, -20
 ]
 
-rook_table = [
+rook_table_white = [
     0, 0, 0, 0, 0, 0, 0, 0,
     5, 10, 10, 10, 10, 10, 10, 5,
     -5, 0, 0, 0, 0, 0, 0, -5,
@@ -63,7 +65,7 @@ rook_table = [
     0, 0, 0, 5, 5, 0, 0, 0
 ]
 
-queen_table = [
+queen_table_white = [
     -20, -10, -10, -5, -5, -10, -10, -20,
     -10, 0, 0, 0, 0, 0, 0, -10,
     -10, 0, 5, 5, 5, 5, 0, -10,
@@ -74,8 +76,8 @@ queen_table = [
     -20, -10, -10, -5, -5, -10, -10, -20
 ]
 
-king_table = [
-    20, 30, 10, 0, 0, 10, 30, 20,
+king_table_white = [
+    20, 30, -10, 0, 0, -10, 30, 20,
     20, 20, 0, 0, 0, 0, 20, 20,
     -10, -20, -20, -20, -20, -20, -20, -10,
     -20, -30, -30, -40, -40, -30, -30, -20,
@@ -84,6 +86,14 @@ king_table = [
     -30, -40, -40, -50, -50, -40, -40, -30,
     -30, -40, -40, -50, -50, -40, -40, -30
 ]
+
+# Piece Square Tables for Black (Reverse for Black)
+pawn_table_black = pawn_table_white[::-1]
+knight_table_black = knight_table_white[::-1]
+bishop_table_black = bishop_table_white[::-1]
+rook_table_black = rook_table_white[::-1]
+queen_table_black = queen_table_white[::-1]
+king_table_black = king_table_white[::-1]
 
 CENTER_SQUARES = {chess.E4, chess.D4, chess.E5, chess.D5}
 
@@ -115,49 +125,65 @@ def evaluation(board, turn):
     )
     #print("value", value)
     #print(board.piece_map())
+    
     # Add Piece Square Tables
     for square in chess.SQUARES:
         piece = board.piece_at(square)
         if piece is not None:
-            #print("square", square)
-            #print("Piece", piece)
             if piece.color == chess.WHITE:
-                value += get_pst_value(piece, square)
+                value += get_pst_value(piece, square, True)
             else:
-                value -= get_pst_value(piece, square)
+                value -= get_pst_value(piece, square, False)
             #print(value)
+    
     # Add term for center control
     center_control = sum(1 for square, piece in enumerate(board.piece_map()) if piece is not None and square in CENTER_SQUARES)
-    
-    # You can adjust the weight according to the importance you want to give to center control
-    center_control_score = 10 * center_control
+    center_control_score = 100 * center_control
     value += center_control_score
+    #print("Center Control Score:", center_control_score, "Total Value:", value)
 
+    
     # Encourage castling
-    castling_bonus = 50  # Adjust the bonus according to your preference
+    castling_bonus = 1000  # Adjust the bonus according to your preference
 
     # Award points for maintaining castling rights
-    castling_rights_bonus = 10  # Adjust the bonus according to your preference
+    castling_rights_bonus = 1000  # Adjust the bonus according to your preference
 
-    #if board.has_kingside_castling_rights(chess.WHITE):
-    #    value += castling_rights_bonus
+    if board.has_kingside_castling_rights(chess.WHITE):
+        value += castling_rights_bonus
+        # print("White Kingside Castling Rights Bonus Added. Total Value:", value)
 
-    #if board.has_queenside_castling_rights(chess.WHITE):
-    #    value += castling_rights_bonus
+    if board.has_queenside_castling_rights(chess.WHITE):
+        value += castling_rights_bonus
+        # print("White Queenside Castling Rights Bonus Added. Total Value:", value)
 
-    #if board.has_kingside_castling_rights(chess.BLACK):
-    #    value -= castling_rights_bonus
+    if board.has_kingside_castling_rights(chess.BLACK):
+        value -= castling_rights_bonus
+        # print("Black Kingside Castling Rights Bonus Deducted. Total Value:", value)
 
-    #if board.has_queenside_castling_rights(chess.BLACK):
-    #    value -= castling_rights_bonus
+    if board.has_queenside_castling_rights(chess.BLACK):
+        value -= castling_rights_bonus
+        # print("Black Queenside Castling Rights Bonus Deducted. Total Value:", value)
 
     # Check if kings are castled
-    
-    #if board.has_kingside_castling_rights(chess.WHITE) and board.has_kingside_castling_rights(chess.BLACK):
-    #    value += castling_bonus
+    if board.has_kingside_castling_rights(chess.WHITE) and board.has_kingside_castling_rights(chess.BLACK):
+        value += castling_bonus
+        # print("Both Kings Castled Bonus Added. Total Value:", value)
 
-    #if board.has_queenside_castling_rights(chess.WHITE) and board.has_queenside_castling_rights(chess.BLACK):
-    #    value += castling_bonus
+    if board.has_queenside_castling_rights(chess.WHITE) and board.has_queenside_castling_rights(chess.BLACK):
+        value += castling_bonus
+        # print("Both Queens Castled Bonus Added. Total Value:", value)
+
+    # Penalize king moves
+    # if board.kings[chess.WHITE] != 4 or board.kings[chess.BLACK] != 60:
+    #     value -= castling_bonus
+    if board.is_stalemate():
+        if chess.WHITE:
+            value -= 100000
+        elif chess.BLACK:
+            value += 100000
+    
+    value = value/1000
 
     return value
 
@@ -198,18 +224,19 @@ def minmax(board, depth, alpha, beta, maximizing_player):
 
     return best
 
-def get_pst_value(piece, square):
+def get_pst_value(piece, square, is_white):
+    # Use the appropriate PST based on the color of the piece
     if piece.piece_type == chess.PAWN:
-        return pawn_table[square]
+        return pawn_table_white[square] if is_white else pawn_table_black[square]
     elif piece.piece_type == chess.KNIGHT:
-        return knight_table[square]
+        return knight_table_white[square] if is_white else knight_table_black[square]
     elif piece.piece_type == chess.BISHOP:
-        return bishop_table[square]
+        return bishop_table_white[square] if is_white else bishop_table_black[square]
     elif piece.piece_type == chess.ROOK:
-        return rook_table[square]
+        return rook_table_white[square] if is_white else rook_table_black[square]
     elif piece.piece_type == chess.QUEEN:
-        return queen_table[square]
+        return queen_table_white[square] if is_white else queen_table_black[square]
     elif piece.piece_type == chess.KING:
-        return king_table[square]
+        return king_table_white[square] if is_white else king_table_black[square]
 
     return 0

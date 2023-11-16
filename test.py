@@ -48,6 +48,13 @@ def select_best_move(board, depth, alpha, beta, maximizing_player):
 
 while not board.is_game_over():
     message = input()
+
+    if message.startswith("setoption"):
+        # Set the options here.
+
+        if message.startswith("setoption name depth"):
+            print(message)
+            depth = message[-2:]
     #with open('C:/Users/tstevahn/To_Laptop/Chess-Engines/log.txt', 'a') as file:
     # with open('C:/Users/Snick/Documents/To_Laptop/Chess-Engines/log.txt', 'a') as file:
     #     file.write(message + os.linesep)
